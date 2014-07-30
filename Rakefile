@@ -5,11 +5,11 @@
 # cleanをすることで、更新時の依存関係を綺麗にする(一度削除してからだから)
 
 CC = "gcc" # コンパイルコマンド
-TARGET = "hoge.o" # ファイル名を変数に
+TARGET = "hoge" # ファイル名を変数に
 INC_DIR ="include" # include ディレクトリを変数に	
 
 require 'rake/clean' # 5,6行はクリーニング
-CLEAN.include(["src/*.o", "*.exe"]) # CLOBBERもokかな
+#CLEAN.include(["src/*.o", "*.exe"]) # CLOBBERもokかな
 
 #desc "Clean & Run"
 #task :all => ["clean", "run"] # タスク2つがある
@@ -18,7 +18,7 @@ desc "Run build"
 task :default => "run" #デフォルトタスクはrun
 
 desc "Build Main"
-task :run => "hoge.o" do # まずrunを作成するにはhogeファイルが必要
+task :run => "hoge" do # まずrunを作成するにはhogeファイルが必要
   puts "---- run  ----" # 見やすくするため
   sh "./#{TARGET}" # TARGETのhoge.exeを集めてくれる
 end
@@ -28,7 +28,7 @@ OBJS = SRCS.ext('o')
 # .oファイルも必要ですが、これから.cで作るので、今定義しても起こらない。
 # 20行で.cファイルを使って.oファイルを生成してから21行(.o)を行う。
 
-file "hoge.o" => OBJS do |t| # OBJSの.oファイルでhogeファイルを生成
+file "hoge" => OBJS do |t| # OBJSの.oファイルでhogeファイルを生成
   puts "---- link ----" # 見やすくするため
   sh "#{CC} -o #{t.name} #{t.prerequisites.join(' ')}" 
   # hogeファイルに必要のsrcディレクトリにある.oファイルをコンパイル
