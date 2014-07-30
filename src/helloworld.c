@@ -2,6 +2,6 @@
  
 int main(int argc, const char * argv[]) {
  
-  printf("mesage!\n");
+  printf("message!\n");
   return 0;
 }
